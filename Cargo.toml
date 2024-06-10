@@ -1,0 +1,29 @@
+[workspace]
+members = ["kernel", "cuda", "macros", "interface", "syn_quote_utils"] 
+exclude = ["codegen"]
+
+[workspace.dependencies]
+kernel.path = "kernel"
+macros.path = "macros"
+interface.path = "interface"
+syn_quote_utils.path = "syn_quote_utils"
+
+[package]
+name = "cuda-fusion"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+quote = "1.0.35"
+syn = { version = "2.0.51", features = ["full", "derive", "parsing", "extra-traits"] }
+cuda = {path = "cuda"}
+typed-arena = "2.0.2"
+proc-macro2 = "1.0.78"
+prettyplease = "0.2.16"
+macros.workspace = true
+kernel.workspace = true
+syn_quote_utils.workspace = true
+interface.workspace = true
+image = "0.25.0"
+itertools = "0.12.1"
+tempfile = "3.10.1"

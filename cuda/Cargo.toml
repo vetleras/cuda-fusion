@@ -1,0 +1,15 @@
+[package]
+name = "cuda"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+itertools = "0.12.1"
+typed-arena = "2.0.2"
+interface.workspace = true
+tempfile = "3.10.1"
+
+[build-dependencies]
+bindgen = "0.69.4"
