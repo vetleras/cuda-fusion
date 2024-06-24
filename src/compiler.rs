@@ -50,6 +50,7 @@ pub fn compile(item_fn: syn::ItemFn) -> Result<String, ()> {
     }
 }
 
+// the panic handler is copied from code supplies by Muybridge. I'm not sure what the original source is
 fn panic_handler() -> syn::ItemFn {
     syn::parse_quote! {
         #[panic_handler]
