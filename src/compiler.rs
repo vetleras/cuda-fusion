@@ -23,7 +23,6 @@ pub fn compile(item_fn: syn::ItemFn) -> Result<String, ()> {
     fs::write(dir.path().join("codegen.rs"), prettyplease::unparse(&file)).unwrap();
     fs::write(dir.path().join("libinterface.rlib"), INTERFACE_RLIB).unwrap();
 
-    // TODO: ensure that we run with proper optimizations
     let output = process::Command::new("rustup")
         .stderr(process::Stdio::inherit())
         .current_dir(&dir)

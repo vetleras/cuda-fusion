@@ -2,32 +2,15 @@ extern crate proc_macro;
 
 use proc_macro::TokenStream;
 use quote::{quote, ToTokens};
-use syn::{parse_macro_input, parse_quote, FnArg, Ident, ItemFn, ReturnType, Type, TypePath};
+use syn::{parse_macro_input, parse_quote, Ident, ItemFn, TypePath};
 use syn_quote_utils::{extract_inputs, extract_output};
 
 #[proc_macro_attribute]
 pub fn map_pixel_kernel(_args: TokenStream, item: TokenStream) -> TokenStream {
     let f = parse_macro_input!(item as ItemFn);
 
-    let FnArg::Typed(fn_arg_type) = f.sig.inputs.first().unwrap() else {
-        panic!();
-    };
-
-    let Type::Path(ref tp) = *fn_arg_type.ty else {
-        panic!();
-    };
-
-    let a = tp.clone();
-
-    let ReturnType::Type(_, ty) = f.sig.output.clone() else {
-        panic!();
-    };
-
-    let Type::Path(ref tp) = *ty else {
-        panic!();
-    };
-
-    let b = tp.path.clone();
+    let a = extract_inputs(&f)[0].1.clone();
+    let b = extract_output(&f).clone();
 
     let name = f.sig.ident.clone();
     let function = f.into_token_stream().to_string();
@@ -44,25 +27,8 @@ pub fn map_pixel_kernel(_args: TokenStream, item: TokenStream) -> TokenStream {
 pub fn map_patch_kernel(_args: TokenStream, item: TokenStream) -> TokenStream {
     let f = parse_macro_input!(item as ItemFn);
 
-    let FnArg::Typed(fn_arg_type) = f.sig.inputs.first().unwrap() else {
-        panic!();
-    };
-
-    let Type::Path(ref tp) = *fn_arg_type.ty else {
-        panic!();
-    };
-
-    let a = tp.clone();
-
-    let ReturnType::Type(_, ty) = f.sig.output.clone() else {
-        panic!();
-    };
-
-    let Type::Path(ref tp) = *ty else {
-        panic!();
-    };
-
-    let b = tp.path.clone();
+    let a = extract_inputs(&f)[0].1.clone();
+    let b = extract_output(&f).clone();
 
     let name = f.sig.ident.clone();
     let function = f.into_token_stream().to_string();

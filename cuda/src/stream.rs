@@ -11,13 +11,13 @@ impl<'a> Stream<'a> {
     pub fn new(_cuda: &'a Cuda) -> Result<Self> {
         let mut inner = ptr::null_mut();
         unsafe {
-            driver::cuStreamCreate(&mut inner, 0)
-                .to_result()
-                .map(|_| Self {
-                    inner,
-                    p: PhantomData,
-                })
+            driver::cuStreamCreate(&mut inner, 0).to_result()?;
         }
+        
+        Ok(Self {
+            p: PhantomData,
+            inner,
+        })
     }
 
     pub(crate) fn inner(&self) -> driver::CUstream {

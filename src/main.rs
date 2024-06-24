@@ -42,7 +42,7 @@ fn main() {
     // init cuda and describe transformation
     let cuda = Cuda::new().unwrap();
 
-    let img = load_image("resources/kitchen.png");
+    let img = load_image("resources/gauss.jpg");
     let (width, height) = (img.width() as usize, img.height() as usize);
 
     let a = new_input::<Rgb<u8>>("a".into(), width, height);
