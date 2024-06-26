@@ -24,7 +24,7 @@
           export CUDA_PATH=${pkgs.cudatoolkit}
           export LIBCLANG_PATH=${pkgs.llvmPackages.libclang.lib}/lib
 
-          rustup default stable
+          rustup default 1.78.0
           cargo install ptx-linker
           rustup toolchain install nightly-2022-10-13
           rustup target add --toolchain nightly-2022-10-13-x86_64-unknown-linux-gnu nvptx64-nvidia-cuda
